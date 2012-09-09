@@ -1,4 +1,6 @@
 <?php
+header("content-type: application/json");
+
 # startTime:
 #    now:
 #    [-|+]?[0-9]+ The offset from now in minutes
@@ -7,8 +9,8 @@ $password = "xtvd_pw";
 $database = "xtvd";
 
 # common SQL strings
-$sql_startTime = 'DATE_ADD(a.time, INTERVAL -8 HOUR)';
-$sql_endTime   = 'DATE_ADD(DATE_ADD(a.time, INTERVAL -8 HOUR), INTERVAL a.duration MINUTE)';
+$sql_startTime = 'DATE_ADD(a.time, INTERVAL -7 HOUR)';
+$sql_endTime   = 'DATE_ADD(DATE_ADD(a.time, INTERVAL -7 HOUR), INTERVAL a.duration MINUTE)';
 $sql_time_format = 'Y-m-d H:i:s';
 
 mysql_connect("localhost",$user,$password);
@@ -84,5 +86,10 @@ while ($i < $num){
    $i++;
 }
 
-echo json_encode($listing);
+$json = json_encode($listing);
+
+if (isset($_GET['callback'])) 
+   echo $_GET['callback'] . '(' . $json . ')';
+else 
+   echo $json;
 ?>
