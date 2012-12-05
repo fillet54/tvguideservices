@@ -39,7 +39,7 @@ mysql_connect("localhost",$user,$password);
 @mysql_select_db($database) or die("Unable to select database");
 
 $startDateTime = new DateTime;
-$guide_duration_in_minutes = 830;
+$guide_duration_in_minutes = 180;
 
 $endDateTime = clone $startDateTime;
 $endDateTime->add(new DateInterval("PT".$guide_duration_in_minutes."M"));

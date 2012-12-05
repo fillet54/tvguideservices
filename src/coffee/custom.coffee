@@ -23,13 +23,34 @@ get_time = ->
    now.getMinutes() + now.getHours() * 60
 
 add_channels = (channels, startTime, duration) ->
+   channel_list = $('<ol>') 
+   channel_list.addClass "channel"
    for channel in channels
       if typeof channel != 'undefined'
-         add_channel channel
+         programs = get_programs channel, startTime, duration
+         item = $('<li>')
+         item.append programs
+         channel_list.append item 
+   $('#guide_data').append channel_list
 
-add_channel = (channel) ->
-   $('#guide_data').append("<h1>Channel "+channel[0].channel+" Added with "+channel.length)
+get_programs = (channel, startTime, duration) ->
+   lineup = $('<ol>')
+   lineup.addClass("lineup");
+   lineup.append('<li style="width:10%">')
+   for program in channel
+         program_item = $("<li>" + program.title + " " + minutes_to_hhmm(program.startTime) + "</li>")
+         width = get_width_for_program program, startTime, duration
+         program_item.width width
+         lineup.append program_item
+   lineup 
 
+get_width_for_program = (program, startTime, duration) ->
+   if program.startTime < startTime
+      program_duration = program.duration - (startTime - program.startTime)
+   else
+      program_duration = program.duration
+
+   width = "" + 90 / (duration/program_duration) + "%" 
 
 guide_width = ->
    return $('#container').width() - window.channel_number_width
