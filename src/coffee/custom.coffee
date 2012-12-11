@@ -66,7 +66,7 @@ add_channels = (channels, startTime, duration) ->
 
 add_channel = (channel, startTime, duration) ->
    ch_div = $('<div>')
-   ch_div.append channel_spacer()
+   ch_div.append channel_spacer(channel[0])
    for program in channel
       if program.start < startTime
          program.duration = program.duration - ((startTime - program.start) / 60000)
@@ -80,6 +80,9 @@ add_channel = (channel, startTime, duration) ->
             program.duration = program.duration - ((program.endTime - endTime) / 60000)
          program_el = add_program program
          program_el.width("" + Math.floor(90 / (duration/program.duration)) + "%")
+         program_el.click () ->
+            $.ajax window.remotecontrol_url  + program.channel
+
          ch_div.append program_el
    ch_div
 
@@ -110,8 +113,9 @@ timeline_spacer = ->
    spacer.width(window.channel_number_width);
    return spacer
 
-channel_spacer = ->
-   spacer = $('<span></span>')
+channel_spacer = (channel) ->
+   spacer = $('<span>')
+   spacer.append(channel.channel)
    spacer.width(window.channel_number_width);
    return spacer
    
