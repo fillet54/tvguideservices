@@ -9,9 +9,9 @@ Date.prototype.format_to_hhmm = () ->
    hours = hours - 12 if hours > 12
    minutes = this.getMinutes()
    minutes = "0" + minutes if minutes < 10
-   am_pm = "am"
-   am_pm = "pm" if this.getHours() >= 12
-   hours + ":" + minutes + am_pm
+   am_pm = "AM"
+   am_pm = "PM" if this.getHours() >= 12
+   hours + ":" + minutes + " " + am_pm
 
 Date.prototype.addMinutes = (minutes_to_add) ->
    this.setMinutes(this.getMinutes() + parseInt(minutes_to_add))
@@ -25,7 +25,17 @@ showGuide = (start, end) ->
    currentTime = get_time()
    currentTime.round_to_previous_half_hour()
    drawTimeline(currentTime, 180, 30)
+   drawCurrentTime currentTime, 180
    drawChannels(currentTime, 180)
+
+drawCurrentTime = (startTime, duration) ->
+   time_mark = $('<div>')
+   time_mark.attr 'id', 'time_mark'
+
+   now = new Date
+   time_since_start = (now - startTime) / 60000
+   time_mark.width("" + Math.floor(90 / (duration/time_since_start)) + "%")
+   $('#guide_data').append time_mark
 
 drawChannels = (startTime, duration) ->
    $.getJSON window.guide_url + "?callback=?", (data)->

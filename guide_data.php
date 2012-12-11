@@ -49,7 +49,7 @@ $startTime = time_in_minutes_at_previous_half_hour($startDateTime);
 $endDate = time_in_month_day($endDateTime);
 $endTime = time_in_minutes_at_next_half_hour($endDateTime);
 $firstChannel = 0;
-$lastChannel = 50;
+$lastChannel = 300;
 
 $query = "SELECT b.title, c.callSign, d.channel, b.subtitle, b.description, a.startDate, a.startTime, a.duration
           FROM schedule a 
