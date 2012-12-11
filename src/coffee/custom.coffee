@@ -86,7 +86,6 @@ add_channel = (channel, startTime, duration) ->
          ch_div.append program_el
    ch_div
 
-
 add_program = (program) ->
    $('<span>').append(program.title)
   
@@ -107,7 +106,6 @@ time_segment = (time, width) ->
    segment.width(width)
    return segment
 
-
 timeline_spacer = ->
    spacer = $('<span></span>')
    spacer.width(window.channel_number_width);
@@ -116,8 +114,16 @@ timeline_spacer = ->
 channel_spacer = (channel) ->
    spacer = $('<span>')
    spacer.append(channel.channel)
+   image = $('<img></img>')
+   image.attr 'src', "images/logos/" + get_channel_logo(channel.callSign) 
+   spacer.append(image)
    spacer.width(window.channel_number_width);
    return spacer
-   
-   
-   
+
+get_channel_logo = (call_sign) ->
+   logo = if channel_map[call_sign] then channel_map[call_sign] else "directv.png"
+   logo
+
+channel_map = { 
+   KCBSDT: 'CBS_hd.png'
+}

@@ -44,11 +44,11 @@ body {
 
      li {
         :first-child {
+           font-family: Verdana;
+           font-size: 18px;
+           text-align: center;
            border-width: 1px 1px 0px 1px;
-        }
-
-        :last-child {
-           width:100%
+           vertical-align: middle;
         }
 
         span {
@@ -64,7 +64,11 @@ body {
            border-width: 1px 1px 1px 0px;
            border-color: #777;
            color: #fff; 
-           font-size: 14px;
+           font-size: 10px;
+
+           img {
+              width: 60px;
+           }
         }
       }
    } 
