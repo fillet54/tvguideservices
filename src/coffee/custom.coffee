@@ -29,11 +29,9 @@ showGuide = (start, end) ->
 
 drawChannels = (startTime, duration) ->
    $.getJSON window.guide_url + "?callback=?", (data)->
-      "x"
+      tempDraw(data, startTime, duration)
 
-tempDraw = (data) ->
-   startTime = get_time()
-   duration = 180
+tempDraw = (data, startTime, duration) ->
    channels = new Array()
    add_datetime_to_results(data)
    $.each data, (i, program) ->
@@ -55,7 +53,7 @@ add_datetime_to_results = (data) ->
       program.start = date
 
 get_time = ->
-   now = new Date("12/09/12 13:30:00")
+   now = new Date
 
 add_channels = (channels, startTime, duration) ->
    channels_ul = $('<ul>')
