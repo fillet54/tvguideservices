@@ -125,5 +125,10 @@ get_channel_logo = (call_sign) ->
    logo
 
 channel_map = { 
-   KCBSDT: 'CBS_hd.png'
+   KCBSDT: 'CBS_hd.png',
+   KNBCDT: 'NBC.png',
+   KTLADT: 'CW%20Television%20Network.png',
+   KABCDT: 'ABC_hd.png',
+   KTTVDT: 'FOX_hd.png',
+   KVCR:   'PBS.png'
 }
