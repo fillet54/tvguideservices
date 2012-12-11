@@ -79,7 +79,7 @@ add_channel = (channel, startTime, duration) ->
          if program.endTime > endTime 
             program.duration = program.duration - ((program.endTime - endTime) / 60000)
          program_el = add_program program
-         program_el.width("" + 90 / (duration/program.duration) + "%")
+         program_el.width("" + Math.floor(90 / (duration/program.duration)) + "%")
          ch_div.append program_el
    ch_div
 
@@ -89,7 +89,7 @@ add_program = (program) ->
   
 drawTimeline = (startTime, duration, interval) ->
    timeline = $('#timeline').html("");
-   timeline.append(channel_spacer())
+   timeline.append(timeline_spacer())
 
    width = "" + 90 / (duration/interval) + "%" 
    time = new Date(startTime)
@@ -103,6 +103,12 @@ time_segment = (time, width) ->
    segment.attr('class', 'segment')
    segment.width(width)
    return segment
+
+
+timeline_spacer = ->
+   spacer = $('<span></span>')
+   spacer.width(window.channel_number_width);
+   return spacer
 
 channel_spacer = ->
    spacer = $('<span></span>')
